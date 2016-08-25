@@ -29,34 +29,7 @@ But the fact is, computers are not built to be internet portals. Computers _comp
 
 The rest of this post is a modest proposal to re-somethingorother The Good Parts of the Internet.
 
-## Microservices will save us all
-
-Probably not, actually.
-
-- A REST API is an interface.
-- Interfaces are contracts. Contracts must be enforced, or stuff breaks
-- The way we enforce contracts is via tests
-- Integrated tests are slow, error-prone, hard to cover all the execution paths
-So we write unit tests where the boundaries are represented by fixtures. We can test that the data returned by a service conforms to the schema expected by its clients. Then we stub that service out in the tests for its clients, hardcoding its return values.
-- Mocking is only a good strategy if the interface is easier to reason about, and less likely to change than, the implementation.
-- This property of the interface can be achieved by adherence to the SRP (TODO: but are they identical?)
-- Therefore, to achieve a microservices architecture that is easy to work with, each service should have one and only one reason to change. Additionally, responsibility should be centralized; each change to a feature should affect only one service. To make changes that affect only one service, the behavior of the service must change without the interface changing. 
-- Therefore, in a good architecture, the interfaces must change less frequently than the internal logic of each service.
-- In order for this to work, the interface must represent exactly one cohesive concept.
-
-> A datatype `foo` returned by service `A` must be opaque to transitive dependents of `A`, except for the single dependent node which we'll call the `consumer of foo`. Intermediate nodes must not know about the internal structure of `foo` data. 
-
-> For any type `t` there must be one and only one producer of `t`.
- 
-A subsystem is a producer of `t` iff it returns values of type `t` without obtaining those values from another subsystem.
-
-If this property is maintained, the addition of a field to `t` will require a change in the producer of `t` and each of its consumers that care about the new field. Consumers that do not use the new field will not be affected.
-
-If more than one subsystem produces `t`, and a new field is added (call the new type `t'`, it must be added to both producers of `t`. This becomes very difficult when one of the subsystems does not actually have information it needs to produce `t'`.
-
-If intermediate subsystems manipulate the value of `t` in between the producer and consumer, 
-
-The web is a content distribution platform
+# The web is a content distribution platform
 
 It is good at
   - letting you download files and software from servers far away
